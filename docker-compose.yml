@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  3wadistorsion_mysql:
+    image: mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    environment:
+      MYSQL_DATABASE: distorsion
+      MYSQL_USER: 3wa
+      MYSQL_PASSWORD: 3wa
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 8101:3306
+    volumes:
+      - ./.data/mysql:/var/lib/mysql
+
+  3wadistorsion_adminer:
+    image: adminer
+    ports:
+      - 8102:8080

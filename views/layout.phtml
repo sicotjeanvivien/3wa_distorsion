@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Distorsion</title>
+  <link rel="stylesheet" href="public/css/app.css">
+</head>
+<body>
+    <header>
+        <h1>Distorsion</h1>
+        <nav class="row">
+          <a class="col-1 col-md-4" href="index.php?page=chat">Chat</a>
+          <a class="col-1 col-md-4" href="index.php?page=about">À propos</a>
+        </nav>
+    </header>
+
+    <main>
+        <?php require getRouteFromQuery(); ?>
+    </main>
+
+    <footer>
+        Le premier chat anonyme du monde !
+    </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<div class="chat-layout row">
+  <nav class="chat-categories col-2 col-md-3">
+    <?php if (empty($categories)): ?>
+      <h2><a href="index.php?page=add_category">Créer votre première catégorie</a></h2>
+    <?php else: ?>
+      <h2>Catégories <a href="index.php?page=add_category"><span class="fas fa-plus"></span></a></h2>
+      <?php foreach ($categories as $category): ?>
+        <div class="category">
+          <h3>
+            <?= htmlentities($category['category']->getName()) ?>
+            <a href="index.php?page=add_room&category_id=<?= htmlentities($category['category']->getId()) ?>">
+              <span class="fas fa-plus"></span>
+            </a>
+          </h3>
+          <?php foreach ($category['rooms'] as $room): ?>
+            <a class="chat-room-link" href="index.php?page=chat&room_id=<?= htmlentities($room->getId()) ?>">
+                <?= htmlentities($room->getName()) ?>
+            </a>
+          <?php endforeach; ?>
+        </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
+  </nav>
+
+  <div class="chat-box col-10 col-md-9">
+    <?php if (!isset($_GET['room_id'])): ?>
+      <div>Choisissez un salon.</div>
+    <?php else: ?>
+      <form class="chat-input" method="POST">
+        <label for="message">Message</label>
+        <input id="message" type="text" name="message" />
+        <button type="submit">Envoyer</button>
+      </form>
+      <div class="chat-messages">
+        <?php if (empty($messages)): ?>
+          <p class="text-info">Aucun message à afficher</p>
+        <?php else: ?>
+          <?php foreach ($messages as $message): ?>
+            <p title="<?= $message->getCreatedAt()->format('d m Y, H:i:s') ?>">
+              [<?= $message->getCreatedAt()->format('H:i') ?>]
+              &nbsp;
+              <?= htmlentities($message->getContent()) ?>
+            </p>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+    <?php endif; ?>
+  </div>
+</div>
